@@ -1,4 +1,4 @@
-# nventory Reservation System
+# Inventory Reservation System
 
 This  online stores sell items safely without double-selling or overselling them. It holds items for a customer while they are paying, ensuring nobody else can buy them at the same split second.
 
