@@ -285,7 +285,7 @@ export default function CheckoutScreen({
           </div>
 
           {overallStatus === "PENDING" && (
-            <div style={{ padding: "1.25rem 1.5rem", display: "flex", gap: "12px", background: "rgba(255, 255, 255, 0.15)", borderTop: "1px solid rgba(255, 255, 255, 0.3)" }}>
+            <div className="checkout-buttons-container">
               <button
                 onClick={handleConfirm}
                 disabled={isExpired}

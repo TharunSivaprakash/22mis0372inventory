@@ -77,14 +77,7 @@ export default function CatalogScreen({
       <BackgroundOrbs />
 
       <div 
-        style={{ 
-          maxWidth: "1200px", 
-          margin: "0 auto", 
-          padding: "2.5rem 1.5rem", 
-          position: "relative", 
-          zIndex: 1 
-        }} 
-        className="animate-fade-in"
+        className={`animate-fade-in catalog-container ${selectedCount > 0 ? "bulk-active" : ""}`}
       >
         
         {error && (
@@ -125,16 +118,7 @@ export default function CatalogScreen({
         )}
 
         <div 
-          className="glass-card"
-          style={{
-            position: "relative",
-            padding: "2.5rem 3rem",
-            borderRadius: "16px",
-            marginBottom: "2.5rem",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-          }}
+          className="glass-card catalog-header-card"
         >
           <span style={{ 
             fontSize: "11px", 
@@ -146,14 +130,7 @@ export default function CatalogScreen({
           }}>
             Tharun's Inventory
           </span>
-          <h1 style={{ 
-            fontSize: "36px", 
-            fontWeight: 800, 
-            letterSpacing: "-0.03em", 
-            color: "var(--text)",
-            marginBottom: "10px",
-            fontFamily: "'Outfit', sans-serif" 
-          }}>
+          <h1 className="catalog-header-title">
             Inventory Reservation
           </h1>
           <p style={{ 
@@ -184,11 +161,7 @@ export default function CatalogScreen({
                 </code>
               </div>
             ) : (
-              <div style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(310px, 1fr))",
-                gap: "24px",
-              }}>
+              <div className="product-grid">
                 {products.map((product) => (
                   <ProductCard 
                     key={product.id} 
@@ -316,48 +289,20 @@ export default function CatalogScreen({
 
       {selectedCount > 0 && (
         <div 
-          className="glass-card animate-fade-in"
-          style={{
-            position: "fixed",
-            bottom: "24px",
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: "calc(100% - 48px)",
-            maxWidth: "600px",
-            padding: "1rem 2rem",
-            zIndex: 100,
-            background: "rgba(17, 24, 39, 0.85)",
-            border: "1px solid rgba(255, 255, 255, 0.15)",
-            borderRadius: "20px",
-            boxShadow: "0 20px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: "1rem",
-            backdropFilter: "blur(20px)",
-          }}
+          className="glass-card animate-fade-in bulk-order-bar"
         >
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <span style={{ fontSize: "10px", fontWeight: 700, color: "rgba(255, 255, 255, 0.4)", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+            <span className="bulk-order-bar-label">
               Bulk Allocation Pipeline
             </span>
-            <span style={{ fontSize: "14px", fontWeight: 700, color: "#f8fafc" }}>
+            <span className="bulk-order-bar-value">
               {selectedCount} item(s) selected
             </span>
           </div>
 
           <button
             onClick={handleBulkReserve}
-            className="btn-primary"
-            style={{
-              padding: "8px 22px",
-              borderRadius: "10px",
-              fontSize: "13px",
-              fontWeight: 600,
-              cursor: "pointer",
-              fontFamily: "'Outfit', sans-serif",
-              border: "1px solid rgba(255, 255, 255, 0.2)",
-            }}
+            className="btn-primary bulk-order-bar-button"
           >
             Reserve Selection
           </button>

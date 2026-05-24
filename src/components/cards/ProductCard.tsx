@@ -57,17 +57,9 @@ export default function ProductCard({
     <div className="tilt-card-container scroll-reveal">
       <div 
         ref={cardRef}
-        className="glass-card tilt-card"
+        className="glass-card tilt-card product-card"
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        style={{
-          padding: "1.75rem",
-          display: "flex",
-          flexDirection: "column",
-          gap: "1.25rem",
-          position: "relative",
-          overflow: "hidden",
-        }}
       >
         
         <div style={{ transform: "translateZ(25px)", transformStyle: "preserve-3d" }}>
@@ -105,26 +97,7 @@ export default function ProductCard({
             return (
               <div 
                 key={wh.warehouseId} 
-                style={{
-                  border: isChecked ? "1px solid rgba(99, 102, 241, 0.45)" : "1px solid rgba(255, 255, 255, 0.45)",
-                  background: isChecked ? "rgba(99, 102, 241, 0.05)" : "rgba(255, 255, 255, 0.25)",
-                  padding: "12px 14px",
-                  borderRadius: "10px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  gap: "8px",
-                  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.01)",
-                  transition: "all 0.2s ease",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = isChecked ? "rgba(99, 102, 241, 0.08)" : "rgba(255, 255, 255, 0.45)";
-                  e.currentTarget.style.borderColor = "rgba(99, 102, 241, 0.2)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = isChecked ? "rgba(99, 102, 241, 0.05)" : "rgba(255, 255, 255, 0.25)";
-                  e.currentTarget.style.borderColor = isChecked ? "rgba(99, 102, 241, 0.45)" : "rgba(255, 255, 255, 0.45)";
-                }}
+                className={`warehouse-row ${isChecked ? "is-checked" : ""}`}
               >
                 <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                   {avail > 0 && (
@@ -132,21 +105,16 @@ export default function ProductCard({
                       type="checkbox"
                       checked={isChecked}
                       onChange={() => onToggleSelect(product.id, wh.warehouseId)}
-                      style={{
-                        width: "16px",
-                        height: "16px",
-                        cursor: "pointer",
-                        accentColor: "var(--accent)",
-                      }}
+                      className="warehouse-checkbox"
                     />
                   )}
                   <div>
-                    <div style={{ fontSize: "13px", fontWeight: 600, color: "var(--text)" }}>
+                    <div className="warehouse-title">
                       {wh.warehouseName} Warehouse
                     </div>
                     <div 
-                      className="mono"
-                      style={{ fontSize: "11px", color: "var(--text3)", marginTop: "2px" }}>
+                      className="mono warehouse-subtitle"
+                    >
                       Available: {avail}
                       {wh.reservedStock > 0 && (
                         <span style={{ color: "var(--amber)", marginLeft: "8px", fontWeight: 500 }}>
@@ -158,7 +126,7 @@ export default function ProductCard({
                 </div>
 
                 {avail > 0 ? (
-                  <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                  <div className="warehouse-action-container">
                     <select
                       value={qty}
                       onChange={(e) => onChangeQuantity(product.id, wh.warehouseId, Number(e.target.value))}
@@ -170,16 +138,7 @@ export default function ProductCard({
                     </select>
                     <button
                       onClick={() => handleReserve(wh)}
-                      className="btn-primary"
-                      style={{
-                        border: "1px solid rgba(255, 255, 255, 0.15)",
-                        borderRadius: "8px",
-                        padding: "6px 14px",
-                        fontSize: "12px",
-                        fontWeight: 600,
-                        cursor: "pointer",
-                        fontFamily: "'Outfit', sans-serif",
-                      }}
+                      className="btn-primary warehouse-reserve-button"
                     >
                       Reserve
                     </button>
