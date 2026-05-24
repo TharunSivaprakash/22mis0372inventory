@@ -1,0 +1,748 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #f4f6fc;
+  
+  /* Modern translucent glass colors */
+  --glass-bg: rgba(255, 255, 255, 0.45);
+  --glass-bg-hover: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-border-bright: rgba(99, 102, 241, 0.35);
+  
+  --surface: rgba(255, 255, 255, 0.45);
+  --surface2: rgba(255, 255, 255, 0.6);
+  --border: rgba(255, 255, 255, 0.5);
+  --border-bright: rgba(99, 102, 241, 0.3);
+  
+  /* Brand accents */
+  --accent: #4f46e5;
+  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  --accent-gradient-hover: linear-gradient(135deg, #4f46e5 0%, #3b32c0 100%);
+  
+  /* High contrast text */
+  --text: #0f172a; /* Slate 900 */
+  --text2: #334155; /* Slate 700 */
+  --text3: #64748b; /* Slate 500 */
+  
+  --green: #10b981;
+  --green-dim: rgba(16, 185, 129, 0.08);
+  --red: #ef4444;
+  --red-dim: rgba(239, 68, 68, 0.08);
+  --amber: #f59e0b;
+}
+
+* { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
+
+body {
+  background: radial-gradient(circle at 10% 20%, rgba(244, 246, 252, 1) 0%, rgba(228, 235, 248, 1) 90%);
+  color: var(--text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Background Animated Glass Orbs */
+.bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.65;
+}
+.bg-orb-1 {
+  width: 450px;
+  height: 450px;
+  background: rgba(99, 102, 241, 0.22); /* Indigo */
+  top: -120px;
+  right: -50px;
+  animation: float-slow 16s infinite alternate ease-in-out;
+}
+.bg-orb-2 {
+  width: 550px;
+  height: 550px;
+  background: rgba(16, 185, 129, 0.12); /* Emerald */
+  bottom: 8%;
+  left: -150px;
+  animation: float-slow-reverse 22s infinite alternate ease-in-out;
+}
+.bg-orb-3 {
+  width: 380px;
+  height: 380px;
+  background: rgba(245, 158, 11, 0.12); /* Amber */
+  top: 35%;
+  right: 12%;
+  animation: float-slow 19s infinite alternate ease-in-out;
+}
+
+@keyframes float-slow {
+  0% { transform: translateY(0px) scale(1) rotate(0deg); }
+  100% { transform: translateY(40px) scale(1.1) rotate(10deg); }
+}
+@keyframes float-slow-reverse {
+  0% { transform: translateY(40px) scale(1.1) rotate(-10deg); }
+  100% { transform: translateY(0px) scale(1) rotate(0deg); }
+}
+
+.mono, .font-mono {
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Glass Card Element style */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  border-radius: 16px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-bright);
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  transform: translateY(-2px);
+}
+
+/* Glass Status Badges */
+.badge-confirmed {
+  background: var(--green-dim) !important;
+  border: 1px solid rgba(16, 185, 129, 0.4) !important;
+  color: var(--green) !important;
+  backdrop-filter: blur(10px);
+}
+
+.badge-released {
+  background: var(--red-dim) !important;
+  border: 1px solid rgba(239, 68, 68, 0.4) !important;
+  color: var(--red) !important;
+  backdrop-filter: blur(10px);
+}
+
+.pulse-amber {
+  color: var(--amber) !important;
+  animation: pulse-amber-anim 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-amber-anim {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 2px rgba(245, 158, 11, 0.4)); }
+  50% { opacity: 0.7; filter: drop-shadow(0 0 0px rgba(245, 158, 11, 0)); }
+}
+
+/* Premium Primary CTA Buttons */
+.btn-primary {
+  background: var(--accent-gradient);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-primary:hover {
+  background: var(--accent-gradient-hover);
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0px);
+}
+
+/* -------------------------------------------------------------
+   🌑 Dark Mode Color System Override
+---------------------------------------------------------------- */
+body.dark-mode {
+  background: radial-gradient(circle at 10% 20%, #080c14 0%, #030712 90%) !important;
+  color: #f8fafc !important;
+  
+  --bg: #030712;
+  --glass-bg: rgba(15, 23, 42, 0.45);
+  --glass-bg-hover: rgba(30, 41, 59, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-bright: rgba(139, 92, 246, 0.45); /* Violet glow */
+  
+  --surface: rgba(15, 23, 42, 0.45);
+  --surface2: rgba(30, 41, 59, 0.4);
+  --border: rgba(255, 255, 255, 0.07);
+  --border-bright: rgba(139, 92, 246, 0.3);
+  
+  --text: #f8fafc;
+  --text2: #cbd5e1;
+  --text3: #94a3b8;
+  
+  --green: #10b981;
+  --green-dim: rgba(16, 185, 129, 0.12);
+  --red: #ef4444;
+  --red-dim: rgba(239, 68, 68, 0.12);
+}
+
+body.dark-mode .bg-orb-1 {
+  background: rgba(139, 92, 246, 0.28) !important; /* violet glow */
+}
+body.dark-mode .bg-orb-2 {
+  background: rgba(56, 189, 248, 0.16) !important; /* cyan glow */
+}
+body.dark-mode .bg-orb-3 {
+  background: rgba(219, 39, 119, 0.15) !important; /* pink glow */
+}
+
+/* -------------------------------------------------------------
+   🖥️ Hardware-Accelerated 3D tilt effects
+---------------------------------------------------------------- */
+.tilt-card-container {
+  perspective: 1200px;
+}
+
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.2s;
+  will-change: transform;
+}
+
+/* Smooth enter scroll-driven animations */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: scroll-reveal-anim 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes scroll-reveal-anim {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sidebar Showcase image zoom hover effect (SSR Compliant) */
+.sidebar-showcase-img {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.sidebar-showcase-img:hover {
+  transform: scale(1.08);
+}
+
+/* Glass Select dropdown */
+.glass-select {
+  background: rgba(255, 255, 255, 0.6);
+  color: #0f172a !important; /* Force dark text in light mode select */
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  outline: none;
+  backdrop-filter: blur(6px);
+  transition: all 0.2s;
+}
+
+.glass-select option {
+  background: #ffffff !important;
+  color: #0f172a !important;
+}
+
+/* Dark Mode select overrides */
+body.dark-mode .glass-select {
+  background: rgba(15, 23, 42, 0.6) !important;
+  color: #f8fafc !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+body.dark-mode .glass-select option {
+  background: #0f172a !important;
+  color: #f8fafc !important;
+}
+
+/* -------------------------------------------------------------
+   ⚙️ Gearbox Mechanical Loader Styles
+---------------------------------------------------------------- */
+@keyframes clockwise {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes counter-clockwise {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.gearbox {
+  background: #111827; /* Rich Slate 900 */
+  height: 150px;
+  width: 200px;
+  position: relative;
+  border: none;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.08), 0px 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.gearbox .overlay {
+  border-radius: 12px;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  box-shadow: inset 0px 0px 24px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+}
+
+.gear {
+  position: absolute;
+  height: 60px;
+  width: 60px;
+  box-shadow: 0px -1px 0px 0px rgba(255, 255, 255, 0.2), 0px 1px 0px 0px #000;
+  border-radius: 50%;
+}
+
+.gear.large {
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+}
+
+.gear.large:after {
+  height: 96px;
+  width: 96px;
+  border-radius: 50%;
+  margin-left: -48px;
+  margin-top: -48px;
+}
+
+.gear.one {
+  top: 12px;
+  left: 10px;
+}
+
+.gear.two {
+  top: 61px;
+  left: 60px;
+}
+
+.gear.three {
+  top: 110px;
+  left: 10px;
+}
+
+.gear.four {
+  top: 13px;
+  left: 128px;
+}
+
+.gear:after {
+  content: "";
+  position: absolute;
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  background: #111827;
+  top: 50%;
+  left: 50%;
+  margin-left: -18px;
+  margin-top: -18px;
+  z-index: 3;
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.05), inset 0px 0px 10px rgba(0, 0, 0, 0.4), inset 0px 2px 0px 0px #090909, inset 0px -1px 0px 0px rgba(255, 255, 255, 0.15);
+}
+
+.gear-inner {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background: #374151; /* Darker metallic gray */
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.large .gear-inner {
+  border-radius: 50%;
+  background: #4b5563; /* Contrasting gear shade */
+}
+
+.gear.one .gear-inner {
+  animation: counter-clockwise 3s infinite linear;
+}
+
+.gear.two .gear-inner {
+  animation: clockwise 3s infinite linear;
+}
+
+.gear.three .gear-inner {
+  animation: counter-clockwise 3s infinite linear;
+}
+
+.gear.four .gear-inner {
+  animation: counter-clockwise 6s infinite linear;
+}
+
+.gear-inner .bar {
+  background: #374151;
+  height: 16px;
+  width: 76px;
+  position: absolute;
+  left: 50%;
+  margin-left: -38px;
+  top: 50%;
+  margin-top: -8px;
+  border-radius: 2px;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.large .gear-inner .bar {
+  background: #4b5563;
+  margin-left: -68px;
+  width: 136px;
+}
+
+.gear-inner .bar:nth-child(2) {
+  transform: rotate(60deg);
+}
+
+.gear-inner .bar:nth-child(3) {
+  transform: rotate(120deg);
+}
+
+.gear-inner .bar:nth-child(4) {
+  transform: rotate(90deg);
+}
+
+.gear-inner .bar:nth-child(5) {
+  transform: rotate(30deg);
+}
+
+.gear-inner .bar:nth-child(6) {
+  transform: rotate(150deg);
+}
+
+/* Glassmorphic Fullscreen Gearbox Loader Overlay */
+.gear-loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gear-loader-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.gear-loader-card {
+  background: rgba(17, 24, 39, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  max-width: 320px;
+  width: 90%;
+  text-align: center;
+  transform: scale(0.9);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gear-loader-overlay.active .gear-loader-card {
+  transform: scale(1);
+}
+
+.gear-loader-message {
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #e2e8f0;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+}
+
+.gear-loader-submessage {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+}
+
+/* -------------------------------------------------------------
+   🌟 Spotlight Product Highlight & In-Card Gear Loader
+---------------------------------------------------------------- */
+.card-focus-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(8, 12, 20, 0.45);
+  backdrop-filter: blur(8px) saturate(140%);
+  -webkit-backdrop-filter: blur(8px) saturate(140%);
+  z-index: 40;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-focus-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Elevate the container when active loading is happening inside */
+.tilt-card-container.is-focused {
+  position: relative;
+  z-index: 50 !important;
+}
+
+.tilt-card-container.is-focused .tilt-card {
+  transform: perspective(1000px) scale(1.04) translate3d(0, -4px, 20px) !important;
+  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3), 0 0 0 2px var(--accent) !important;
+  border-color: rgba(99, 102, 241, 0.6) !important;
+}
+
+/* In-Card Loader Overlay */
+.in-card-loader-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(17, 24, 39, 0.9); /* Dark frosted background inside card */
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 16px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.in-card-loader-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Make gears inside the card slightly smaller and fit perfectly */
+.in-card-loader-overlay .gearbox {
+  transform: scale(0.85);
+  box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.1), 0px 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.in-card-loader-text-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.in-card-loader-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #f1f5f9;
+  letter-spacing: -0.01em;
+}
+
+.in-card-loader-subtitle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* -------------------------------------------------------------
+   🍂 Windy Leaf Peach Button Styles
+---------------------------------------------------------------- */
+.btn-windy {
+  position: relative;
+  padding: 10px 32px;
+  background: #fec195;
+  font-size: 13px;
+  font-weight: 600;
+  color: #181818 !important;
+  cursor: pointer;
+  border: 1px solid #fec195;
+  border-radius: 8px;
+  filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.15));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: visible; /* Let leaf sways hang off slightly */
+}
+
+.btn-windy:hover {
+  border: 1px solid #f3b182;
+  background: linear-gradient(
+    85deg,
+    #fec195,
+    #fcc196,
+    #fabd92,
+    #fac097,
+    #fac39c
+  );
+  animation: wind 2s ease-in-out infinite;
+  box-shadow: 0 10px 20px -5px rgba(243, 177, 130, 0.45);
+}
+
+@keyframes wind {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.icon-1 {
+  position: absolute;
+  top: -8px;
+  right: 8px;
+  width: 20px;
+  height: 20px;
+  transform-origin: 0 0;
+  transform: rotate(10deg);
+  transition: all 0.5s ease-in-out;
+  filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.25));
+  pointer-events: none;
+}
+
+.btn-windy:hover .icon-1 {
+  animation: slay-1 3s cubic-bezier(0.52, 0, 0.58, 1) infinite;
+  transform: rotate(10deg);
+}
+
+@keyframes slay-1 {
+  0% {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(10deg);
+  }
+}
+
+.icon-2 {
+  position: absolute;
+  top: -8px;
+  left: 28px;
+  width: 12px;
+  height: 12px;
+  transform-origin: 50% 0;
+  transform: rotate(10deg);
+  transition: all 1s ease-in-out;
+  filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.35));
+  pointer-events: none;
+}
+
+.btn-windy:hover .icon-2 {
+  animation: slay-2 3s cubic-bezier(0.52, 0, 0.58, 1) 0.5s infinite;
+  transform: rotate(0);
+}
+
+@keyframes slay-2 {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(15deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+.icon-3 {
+  position: absolute;
+  top: -8px;
+  left: 8px;
+  width: 16px;
+  height: 16px;
+  transform-origin: 50% 0;
+  transform: rotate(-5deg);
+  transition: all 1s ease-in-out;
+  filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.35));
+  pointer-events: none;
+}
+
+.btn-windy:hover .icon-3 {
+  animation: slay-3 2s cubic-bezier(0.52, 0, 0.58, 1) 0.8s infinite;
+  transform: rotate(0);
+}
+
+@keyframes slay-3 {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-12deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+
+
+
+
+
