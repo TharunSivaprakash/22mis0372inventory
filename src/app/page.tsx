@@ -34,24 +34,21 @@ export default async function HomePage({ searchParams }: HomePageProps) {
     })),
   }));
 
-  // Fetch Sales Performance analytics dynamically from the live PostgreSQL DB
   const confirmedReservations = await prisma.reservation.findMany({
     where: { status: "CONFIRMED" },
   });
   const totalUnitsSold = confirmedReservations.reduce((sum, res) => sum + res.quantity, 0);
-  const totalRevenue = totalUnitsSold * 80000; // Multiplier in Rupees (₹80,000 average item cost)
+  const totalRevenue = totalUnitsSold * 80000;
   
   const pendingCount = await prisma.reservation.count({
     where: { status: "PENDING" },
   });
 
-  // Calculate total stock availability for the Circular/Round Graph (Donut style)
   const totalStock = products.reduce((sum, p) => sum + p.inventories.reduce((isum, inv) => isum + inv.totalStock, 0), 0);
   const totalReserved = products.reduce((sum, p) => sum + p.inventories.reduce((isum, inv) => isum + inv.reservedStock, 0), 0);
   const totalAvailable = totalStock - totalReserved;
   const availablePct = totalStock > 0 ? Math.round((totalAvailable / totalStock) * 100) : 100;
 
-  // Donut chart stroke calculations (2 * PI * R where R = 38, circumference = 238.76)
   const circumference = 238.76;
   const strokeDashoffset = circumference - (availablePct / 100) * circumference;
 

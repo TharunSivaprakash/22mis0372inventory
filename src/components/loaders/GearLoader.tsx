@@ -24,8 +24,7 @@ export default function GearLoader({
       <div className={cardClass}>
         <div className="gearbox">
           <div className="overlay"></div>
-          
-          {/* Gear 1 */}
+
           <div className="gear one">
             <div className="gear-inner">
               <div className="bar"></div>
@@ -37,7 +36,6 @@ export default function GearLoader({
             </div>
           </div>
 
-          {/* Gear 2 */}
           <div className="gear two">
             <div className="gear-inner">
               <div className="bar"></div>
@@ -49,7 +47,6 @@ export default function GearLoader({
             </div>
           </div>
 
-          {/* Gear 3 */}
           <div className="gear three">
             <div className="gear-inner">
               <div className="bar"></div>
@@ -61,7 +58,6 @@ export default function GearLoader({
             </div>
           </div>
 
-          {/* Gear 4 (Large) */}
           <div className="gear four large">
             <div className="gear-inner">
               <div className="bar"></div>

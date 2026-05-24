@@ -6,8 +6,7 @@
 
 :root {
   --bg: #f4f6fc;
-  
-  /* Modern translucent glass colors */
+
   --glass-bg: rgba(255, 255, 255, 0.45);
   --glass-bg-hover: rgba(255, 255, 255, 0.65);
   --glass-border: rgba(255, 255, 255, 0.6);
@@ -17,16 +16,14 @@
   --surface2: rgba(255, 255, 255, 0.6);
   --border: rgba(255, 255, 255, 0.5);
   --border-bright: rgba(99, 102, 241, 0.3);
-  
-  /* Brand accents */
+
   --accent: #4f46e5;
   --accent-gradient: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
   --accent-gradient-hover: linear-gradient(135deg, #4f46e5 0%, #3b32c0 100%);
-  
-  /* High contrast text */
-  --text: #0f172a; /* Slate 900 */
-  --text2: #334155; /* Slate 700 */
-  --text3: #64748b; /* Slate 500 */
+
+  --text: #0f172a; 
+  --text2: #334155; 
+  --text3: #64748b; 
   
   --green: #10b981;
   --green-dim: rgba(16, 185, 129, 0.08);
@@ -51,7 +48,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Background Animated Glass Orbs */
 .bg-orb {
   position: absolute;
   border-radius: 50%;
@@ -63,7 +59,7 @@ body {
 .bg-orb-1 {
   width: 450px;
   height: 450px;
-  background: rgba(99, 102, 241, 0.22); /* Indigo */
+  background: rgba(99, 102, 241, 0.22); 
   top: -120px;
   right: -50px;
   animation: float-slow 16s infinite alternate ease-in-out;
@@ -71,7 +67,7 @@ body {
 .bg-orb-2 {
   width: 550px;
   height: 550px;
-  background: rgba(16, 185, 129, 0.12); /* Emerald */
+  background: rgba(16, 185, 129, 0.12); 
   bottom: 8%;
   left: -150px;
   animation: float-slow-reverse 22s infinite alternate ease-in-out;
@@ -79,7 +75,7 @@ body {
 .bg-orb-3 {
   width: 380px;
   height: 380px;
-  background: rgba(245, 158, 11, 0.12); /* Amber */
+  background: rgba(245, 158, 11, 0.12); 
   top: 35%;
   right: 12%;
   animation: float-slow 19s infinite alternate ease-in-out;
@@ -107,7 +103,6 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Glass Card Element style */
 .glass-card {
   background: var(--glass-bg);
   backdrop-filter: blur(24px) saturate(190%);
@@ -125,7 +120,6 @@ body {
   transform: translateY(-2px);
 }
 
-/* Glass Status Badges */
 .badge-confirmed {
   background: var(--green-dim) !important;
   border: 1px solid rgba(16, 185, 129, 0.4) !important;
@@ -150,7 +144,6 @@ body {
   50% { opacity: 0.7; filter: drop-shadow(0 0 0px rgba(245, 158, 11, 0)); }
 }
 
-/* Premium Primary CTA Buttons */
 .btn-primary {
   background: var(--accent-gradient);
   color: #ffffff;
@@ -169,9 +162,6 @@ body {
   transform: translateY(0px);
 }
 
-/* -------------------------------------------------------------
-   🌑 Dark Mode Color System Override
----------------------------------------------------------------- */
 body.dark-mode {
   background: radial-gradient(circle at 10% 20%, #080c14 0%, #030712 90%) !important;
   color: #f8fafc !important;
@@ -180,7 +170,7 @@ body.dark-mode {
   --glass-bg: rgba(15, 23, 42, 0.45);
   --glass-bg-hover: rgba(30, 41, 59, 0.55);
   --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-border-bright: rgba(139, 92, 246, 0.45); /* Violet glow */
+  --glass-border-bright: rgba(139, 92, 246, 0.45); 
   
   --surface: rgba(15, 23, 42, 0.45);
   --surface2: rgba(30, 41, 59, 0.4);
@@ -198,18 +188,15 @@ body.dark-mode {
 }
 
 body.dark-mode .bg-orb-1 {
-  background: rgba(139, 92, 246, 0.28) !important; /* violet glow */
+  background: rgba(139, 92, 246, 0.28) !important; 
 }
 body.dark-mode .bg-orb-2 {
-  background: rgba(56, 189, 248, 0.16) !important; /* cyan glow */
+  background: rgba(56, 189, 248, 0.16) !important; 
 }
 body.dark-mode .bg-orb-3 {
-  background: rgba(219, 39, 119, 0.15) !important; /* pink glow */
+  background: rgba(219, 39, 119, 0.15) !important; 
 }
 
-/* -------------------------------------------------------------
-   🖥️ Hardware-Accelerated 3D tilt effects
----------------------------------------------------------------- */
 .tilt-card-container {
   perspective: 1200px;
 }
@@ -220,7 +207,6 @@ body.dark-mode .bg-orb-3 {
   will-change: transform;
 }
 
-/* Smooth enter scroll-driven animations */
 .scroll-reveal {
   opacity: 0;
   transform: translateY(20px);
@@ -234,7 +220,6 @@ body.dark-mode .bg-orb-3 {
   }
 }
 
-/* Sidebar Showcase image zoom hover effect (SSR Compliant) */
 .sidebar-showcase-img {
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
@@ -244,10 +229,9 @@ body.dark-mode .bg-orb-3 {
   transform: scale(1.08);
 }
 
-/* Glass Select dropdown */
 .glass-select {
   background: rgba(255, 255, 255, 0.6);
-  color: #0f172a !important; /* Force dark text in light mode select */
+  color: #0f172a !important; 
   border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 6px;
   padding: 4px 8px;
@@ -263,7 +247,6 @@ body.dark-mode .bg-orb-3 {
   color: #0f172a !important;
 }
 
-/* Dark Mode select overrides */
 body.dark-mode .glass-select {
   background: rgba(15, 23, 42, 0.6) !important;
   color: #f8fafc !important;
@@ -275,9 +258,6 @@ body.dark-mode .glass-select option {
   color: #f8fafc !important;
 }
 
-/* -------------------------------------------------------------
-   ⚙️ Gearbox Mechanical Loader Styles
----------------------------------------------------------------- */
 @keyframes clockwise {
   0% {
     transform: rotate(0deg);
@@ -297,7 +277,7 @@ body.dark-mode .glass-select option {
 }
 
 .gearbox {
-  background: #111827; /* Rich Slate 900 */
+  background: #111827; 
   height: 150px;
   width: 200px;
   position: relative;
@@ -381,14 +361,14 @@ body.dark-mode .glass-select option {
   position: relative;
   height: 100%;
   width: 100%;
-  background: #374151; /* Darker metallic gray */
+  background: #374151; 
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .large .gear-inner {
   border-radius: 50%;
-  background: #4b5563; /* Contrasting gear shade */
+  background: #4b5563; 
 }
 
 .gear.one .gear-inner {
@@ -447,7 +427,6 @@ body.dark-mode .glass-select option {
   transform: rotate(150deg);
 }
 
-/* Glassmorphic Fullscreen Gearbox Loader Overlay */
 .gear-loader-overlay {
   position: fixed;
   top: 0;
@@ -511,9 +490,6 @@ body.dark-mode .glass-select option {
   font-weight: 500;
 }
 
-/* -------------------------------------------------------------
-   🌟 Spotlight Product Highlight & In-Card Gear Loader
----------------------------------------------------------------- */
 .card-focus-overlay {
   position: fixed;
   top: 0;
@@ -534,7 +510,6 @@ body.dark-mode .glass-select option {
   pointer-events: auto;
 }
 
-/* Elevate the container when active loading is happening inside */
 .tilt-card-container.is-focused {
   position: relative;
   z-index: 50 !important;
@@ -546,14 +521,13 @@ body.dark-mode .glass-select option {
   border-color: rgba(99, 102, 241, 0.6) !important;
 }
 
-/* In-Card Loader Overlay */
 .in-card-loader-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(17, 24, 39, 0.9); /* Dark frosted background inside card */
+  background: rgba(17, 24, 39, 0.9); 
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   border-radius: 16px;
@@ -573,7 +547,6 @@ body.dark-mode .glass-select option {
   pointer-events: auto;
 }
 
-/* Make gears inside the card slightly smaller and fit perfectly */
 .in-card-loader-overlay .gearbox {
   transform: scale(0.85);
   box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.1), 0px 4px 16px rgba(0, 0, 0, 0.3);
@@ -603,9 +576,6 @@ body.dark-mode .glass-select option {
   letter-spacing: 0.1em;
 }
 
-/* -------------------------------------------------------------
-   🍂 Windy Leaf Peach Button Styles
----------------------------------------------------------------- */
 .btn-windy {
   position: relative;
   padding: 10px 32px;
@@ -622,7 +592,7 @@ body.dark-mode .glass-select option {
   justify-content: center;
   text-decoration: none !important;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  overflow: visible; /* Let leaf sways hang off slightly */
+  overflow: visible; 
 }
 
 .btn-windy:hover {
@@ -740,9 +710,4 @@ body.dark-mode .glass-select option {
     transform: rotate(0);
   }
 }
-
-
-
-
-
 

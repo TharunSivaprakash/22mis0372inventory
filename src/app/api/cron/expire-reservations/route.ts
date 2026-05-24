@@ -1,10 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-// Called by Vercel Cron every minute
-// vercel.json: { "crons": [{ "path": "/api/cron/expire-reservations", "schedule": "* * * * *" }] }
 export async function GET(req: NextRequest) {
-  // Protect with a secret so only Vercel Cron (or you) can call it
   const authHeader = req.headers.get("authorization");
   if (
     process.env.CRON_SECRET &&
@@ -15,7 +12,6 @@ export async function GET(req: NextRequest) {
 
   const now = new Date();
 
-  // Find all expired PENDING reservations
   const expired = await prisma.reservation.findMany({
     where: {
       status: "PENDING",

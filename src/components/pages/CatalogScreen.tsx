@@ -30,7 +30,6 @@ export default function CatalogScreen({
   const router = useRouter();
   const [error, setError] = useState<string | null>(initialError);
   
-  // Track selections by key: "${productId}-${warehouseId}"
   const [selected, setSelected] = useState<Record<string, boolean>>({});
   const [quantities, setQuantities] = useState<Record<string, number>>({});
 
@@ -68,14 +67,13 @@ export default function CatalogScreen({
       return { productId, warehouseId, quantity: qty };
     });
 
-    // Navigate immediately to our dedicated fullscreen reservation loader route
     const encodedItems = encodeURIComponent(JSON.stringify(itemsToReserve));
     router.push(`/reserve/processing?items=${encodedItems}`);
   };
 
   return (
     <div style={{ position: "relative", minHeight: "100vh", overflow: "hidden" }}>
-      {/* Reusable Background Floating Glass Orbs */}
+      
       <BackgroundOrbs />
 
       <div 
@@ -88,7 +86,7 @@ export default function CatalogScreen({
         }} 
         className="animate-fade-in"
       >
-        {/* Error Notification Banner */}
+        
         {error && (
           <div 
             className="mono animate-fade-in"
@@ -126,7 +124,6 @@ export default function CatalogScreen({
           </div>
         )}
 
-        {/* Hero Banner */}
         <div 
           className="glass-card"
           style={{
@@ -169,10 +166,8 @@ export default function CatalogScreen({
           </p>
         </div>
 
-        {/* Dynamic Sidebar + Grid Layout */}
         <div style={{ display: "flex", gap: "30px", alignItems: "flex-start", flexWrap: "wrap" }}>
-          
-          {/* Main Registry Column */}
+
           <div style={{ flex: 1, minWidth: "300px", paddingBottom: selectedCount > 0 ? "80px" : "0" }}>
             {products.length === 0 ? (
               <div 
@@ -208,7 +203,6 @@ export default function CatalogScreen({
             )}
           </div>
 
-          {/* Floating Glass Showcase Sidebar */}
           <div 
             className="glass-card scroll-reveal"
             style={{
@@ -222,7 +216,7 @@ export default function CatalogScreen({
               flexShrink: 0,
             }}
           >
-            {/* Donut Graph */}
+            
             <div style={{
               display: "flex",
               justifyContent: "center",
@@ -289,7 +283,6 @@ export default function CatalogScreen({
               </p>
             </div>
 
-            {/* Quick Metrics Dashboard */}
             <div style={{ display: "flex", flexDirection: "column", gap: "10px", borderTop: "1px solid var(--border)", paddingTop: "12px" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: "12px" }}>
                 <span style={{ color: "var(--text3)" }}>Total Revenue:</span>
@@ -321,7 +314,6 @@ export default function CatalogScreen({
         </div>
       </div>
 
-      {/* Floating Satiny Bulk Checkout Glass Bar */}
       {selectedCount > 0 && (
         <div 
           className="glass-card animate-fade-in"

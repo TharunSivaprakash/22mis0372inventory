@@ -15,7 +15,6 @@ export default function ReserveProcessingPage() {
     hasTriggeredRef.current = true;
 
     const performReservation = async () => {
-      // 2-second minimum spin delay for visual satisfaction
       const spinPromise = new Promise((resolve) => setTimeout(resolve, 2000));
 
       const itemsStr = searchParams ? searchParams.get("items") : null;
@@ -78,7 +77,7 @@ export default function ReserveProcessingPage() {
 
   return (
     <div style={{ position: "relative", minHeight: "100vh", background: "#0b0f19", overflow: "hidden" }}>
-      {/* Reusable Background Floating Orbs */}
+      
       <BackgroundOrbs opacity1={0.45} opacity2={0.35} opacity3={0.35} />
 
       <GearLoader 

@@ -32,7 +32,6 @@ export async function POST(req: NextRequest) {
         if (reservation.status === "RELEASED") throw new Error(`RELEASED_${resId}`);
         if (new Date() > reservation.expiresAt) throw new Error(`EXPIRED_${resId}`);
 
-        // Permanently decrement totalStock and release the reservation hold
         await tx.inventory.updateMany({
           where: {
             productId: reservation.productId,

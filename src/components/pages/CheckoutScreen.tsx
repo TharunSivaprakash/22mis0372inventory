@@ -33,7 +33,6 @@ export default function CheckoutScreen({
     }
   }, [initialError]);
 
-  // Find the soonest expiring pending reservation to bind our global countdown timer to
   const soonest = reservations.reduce((soon, r) => {
     if (soon.status !== "PENDING") return r;
     if (r.status !== "PENDING") return soon;
@@ -51,7 +50,6 @@ export default function CheckoutScreen({
     overallStatus
   );
 
-  // Poll reservations status in background
   const poll = useCallback(async () => {
     if (overallStatus !== "PENDING") return;
     try {
@@ -70,7 +68,6 @@ export default function CheckoutScreen({
         setReservations(updated);
       }
     } catch {
-      // silent
     }
   }, [reservations, overallStatus]);
 
@@ -81,7 +78,6 @@ export default function CheckoutScreen({
 
   const handleConfirm = async () => {
     if (overallStatus !== "PENDING") return;
-    // Redirect immediately to our dedicated transactional loader gateway page
     const idsList = reservations.map((r) => r.id).join(",");
     router.push(`/checkout/${isBulk ? "bulk" : soonest.id}/processing?ids=${idsList}`);
   };
@@ -98,7 +94,6 @@ export default function CheckoutScreen({
     try {
       const pendingReservations = reservations.filter((r) => r.status === "PENDING");
       
-      // Call releases concurrently
       await Promise.all(
         pendingReservations.map(async (r) => {
           const res = await fetch(`/api/reservations/${r.id}/release`, {
@@ -118,7 +113,7 @@ export default function CheckoutScreen({
   };
 
   const totalQuantity = reservations.reduce((sum, r) => sum + r.quantity, 0);
-  const totalPrice = totalQuantity * 80000; // Mock average unit price of ₹80,000
+  const totalPrice = totalQuantity * 80000;
 
   const progressPct = (() => {
     if (overallStatus !== "PENDING") return 0;
@@ -128,10 +123,9 @@ export default function CheckoutScreen({
 
   return (
     <div style={{ position: "relative", minHeight: "100vh", overflow: "hidden" }} className="animate-fade-in">
-      {/* Background Floating Glass Orbs */}
+      
       <BackgroundOrbs />
 
-      {/* Standalone Cancel Action Fullscreen Loader */}
       <GearLoader 
         isOpen={actionLoading === "cancel"} 
         message="Releasing stock reservations..." 
@@ -144,7 +138,7 @@ export default function CheckoutScreen({
       </PageHeader>
 
       <main style={{ maxWidth: "500px", margin: "0 auto", padding: "3rem 1.5rem", position: "relative", zIndex: 1 }}>
-        {/* Status banner */}
+        
         {overallStatus !== "PENDING" && (
           <div
             style={{
@@ -199,9 +193,8 @@ export default function CheckoutScreen({
           </div>
         )}
 
-        {/* Main checkout invoice card */}
         <div className="glass-card" style={{ overflow: "hidden" }}>
-          {/* Header */}
+          
           <div style={{ padding: "1.5rem", borderBottom: "1px solid var(--border)" }}>
             <h1 style={{ fontSize: "18px", fontWeight: 700, color: "var(--text)", letterSpacing: "-0.02em", marginBottom: "4px", fontFamily: "'Outfit', sans-serif" }}>
               {isBulk ? "Bulk Checkout Invoice" : "Checkout Invoice"}
@@ -211,7 +204,6 @@ export default function CheckoutScreen({
             </p>
           </div>
 
-          {/* Reserved Items List */}
           <div style={{ padding: "1.5rem", borderBottom: "1px solid var(--border)", display: "flex", flexDirection: "column", gap: "12px" }}>
             <span style={{ fontSize: "10px", fontWeight: 700, color: "var(--text3)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "4px" }}>
               Items Allocation List
@@ -229,7 +221,6 @@ export default function CheckoutScreen({
             ))}
           </div>
 
-          {/* Summary pricing */}
           <div style={{ padding: "1.5rem", borderBottom: "1px solid var(--border)", display: "flex", flexDirection: "column", gap: "10px" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: "13px" }}>
               <span style={{ color: "var(--text2)" }}>Total Quantity</span>
@@ -243,7 +234,6 @@ export default function CheckoutScreen({
             </div>
           </div>
 
-          {/* Expiry countdown block */}
           <div style={{ padding: "1.5rem", borderBottom: "1px solid var(--border)" }}>
             <div style={{ fontSize: "10px", fontWeight: 700, color: "var(--text3)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "8px" }}>
               {overallStatus === "PENDING" ? "Hold Expiry Countdown" : "Holds Status"}
@@ -294,7 +284,6 @@ export default function CheckoutScreen({
             )}
           </div>
 
-          {/* Action triggers */}
           {overallStatus === "PENDING" && (
             <div style={{ padding: "1.25rem 1.5rem", display: "flex", gap: "12px", background: "rgba(255, 255, 255, 0.15)", borderTop: "1px solid rgba(255, 255, 255, 0.3)" }}>
               <button

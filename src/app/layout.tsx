@@ -53,8 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
             <ThemeToggle />
-            
-            {/* Standard SaaS Live status indicator */}
+
             <span 
               className="mono"
               style={{ 

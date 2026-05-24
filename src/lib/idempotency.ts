@@ -10,7 +10,6 @@ export async function withIdempotency(
     return NextResponse.json(result.data, { status: result.status });
   }
 
-  // Check if we already have a stored response for this key
   const existing = await prisma.idempotencyKey.findUnique({
     where: { key },
   });
@@ -21,7 +20,6 @@ export async function withIdempotency(
 
   const result = await handler();
 
-  // Store the result for future duplicate requests
   await prisma.idempotencyKey.create({
     data: {
       key,

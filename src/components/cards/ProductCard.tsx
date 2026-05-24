@@ -28,19 +28,17 @@ export default function ProductCard({
     router.push(`/reserve/processing?productId=${product.id}&warehouseId=${wh.warehouseId}&quantity=${qty}`);
   };
 
-  // Interactive 3D tilt calculations
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = cardRef.current;
     if (!card) return;
 
     const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left; // cursor X inside card
-    const y = e.clientY - rect.top;  // cursor Y inside card
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
     
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    // Dynamic 15 degrees playful tilt calculation
     const rotateX = ((centerY - y) / centerY) * 15;
     const rotateY = ((x - centerX) / centerX) * 15;
 
@@ -71,7 +69,7 @@ export default function ProductCard({
           overflow: "hidden",
         }}
       >
-        {/* Product header - with 3D Holographic Lift */}
+        
         <div style={{ transform: "translateZ(25px)", transformStyle: "preserve-3d" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "8px", marginBottom: "8px" }}>
             <h2 style={{ fontSize: "17px", fontWeight: 700, color: "var(--text)", letterSpacing: "-0.02em", fontFamily: "'Outfit', sans-serif" }}>
@@ -97,7 +95,6 @@ export default function ProductCard({
           </p>
         </div>
 
-        {/* Warehouse nodes list - with 3D Holographic Lift */}
         <div style={{ display: "flex", flexDirection: "column", gap: "10px", transform: "translateZ(20px)" }}>
           {product.warehouses.map((wh) => {
             const avail = wh.availableStock;

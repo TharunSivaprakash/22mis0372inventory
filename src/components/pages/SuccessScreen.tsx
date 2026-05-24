@@ -23,7 +23,6 @@ type SuccessScreenProps = {
 };
 
 export default function SuccessScreen({ id, idsStr, reservations }: SuccessScreenProps) {
-  // Calculate pricing (mock value ₹80,000 per premium item)
   const itemPrice = 80000;
   const totalQuantity = reservations.reduce((sum, r) => sum + r.quantity, 0);
   const totalPrice = totalQuantity * itemPrice;
@@ -32,10 +31,9 @@ export default function SuccessScreen({ id, idsStr, reservations }: SuccessScree
 
   return (
     <div style={{ position: "relative", minHeight: "100vh", overflow: "hidden" }} className="animate-fade-in">
-      {/* Background Floating Glass Orbs */}
+      
       <BackgroundOrbs />
 
-      {/* Mini top header bar */}
       <PageHeader>
         <WindyButton href="/">
           ← Return to Catalog
@@ -43,8 +41,7 @@ export default function SuccessScreen({ id, idsStr, reservations }: SuccessScree
       </PageHeader>
 
       <main style={{ maxWidth: "560px", margin: "0 auto", padding: "3rem 1.5rem", position: "relative", zIndex: 1 }}>
-        
-        {/* Pulsing Green Check Circle Icon */}
+
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "2rem", textAlign: "center" }}>
           <div style={{
             width: "72px",
@@ -70,7 +67,6 @@ export default function SuccessScreen({ id, idsStr, reservations }: SuccessScree
           </p>
         </div>
 
-        {/* Main Glassmorphic Receipt Card */}
         <div className="glass-card" style={{ padding: "2rem", marginBottom: "2rem", display: "flex", flexDirection: "column", gap: "1.5rem" }}>
           
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", borderBottom: "1px dashed var(--border)", paddingBottom: "1rem" }}>
@@ -94,7 +90,6 @@ export default function SuccessScreen({ id, idsStr, reservations }: SuccessScree
             </div>
           </div>
 
-          {/* Details breakdown */}
           <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
             <span style={{ fontSize: "10px", fontWeight: 700, color: "var(--text3)", textTransform: "uppercase", letterSpacing: "0.08em", borderBottom: "1px solid var(--border)", paddingBottom: "6px" }}>
               Allocated Products
@@ -127,10 +122,8 @@ export default function SuccessScreen({ id, idsStr, reservations }: SuccessScree
 
         </div>
 
-        {/* Reusable Shipping Progress Timeline */}
         <DispatchTracker warehouseNames={warehouseNames} />
 
-        {/* Back Link Button */}
         <div style={{ display: "flex", gap: "12px" }}>
           <WindyButton
             href="/"

@@ -15,8 +15,7 @@ export default function DispatchTracker({ warehouseNames }: DispatchTrackerProps
         Inventory Dispatch Tracker
       </h3>
       <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", position: "relative" }}>
-        
-        {/* vertical connector line */}
+
         <div style={{
           position: "absolute",
           left: "11px",
@@ -27,7 +26,6 @@ export default function DispatchTracker({ warehouseNames }: DispatchTrackerProps
           zIndex: 0,
         }} />
 
-        {/* Step 1 */}
         <div style={{ display: "flex", gap: "14px", alignItems: "flex-start", position: "relative", zIndex: 1 }}>
           <div style={{ width: "24px", height: "24px", borderRadius: "50%", background: "var(--green)", border: "4px solid var(--green-dim)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "10px" }} />
           <div>
@@ -36,7 +34,6 @@ export default function DispatchTracker({ warehouseNames }: DispatchTrackerProps
           </div>
         </div>
 
-        {/* Step 2 */}
         <div style={{ display: "flex", gap: "14px", alignItems: "flex-start", position: "relative", zIndex: 1 }}>
           <div style={{ width: "24px", height: "24px", borderRadius: "50%", background: "var(--green)", border: "4px solid var(--green-dim)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "10px" }} />
           <div>
@@ -45,7 +42,6 @@ export default function DispatchTracker({ warehouseNames }: DispatchTrackerProps
           </div>
         </div>
 
-        {/* Step 3 */}
         <div style={{ display: "flex", gap: "14px", alignItems: "flex-start", position: "relative", zIndex: 1 }}>
           <div style={{ width: "24px", height: "24px", borderRadius: "50%", background: "rgba(99, 102, 241, 0.2)", border: "4px solid rgba(99, 102, 241, 0.4)", display: "flex", alignItems: "center", justifyContent: "center" }} className="pulse-amber" />
           <div>

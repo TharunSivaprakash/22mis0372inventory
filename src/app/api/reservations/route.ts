@@ -9,7 +9,6 @@ const ReserveSchema = z.object({
   quantity: z.number().int().positive().max(100),
 });
 
-
 export async function POST(req: NextRequest) {
   const idempotencyKey = req.headers.get("Idempotency-Key");
 
@@ -41,7 +40,6 @@ export async function POST(req: NextRequest) {
         for (const item of payload) {
           const { productId, warehouseId, quantity } = item;
 
-          // Lock the inventory row to prevent race conditions
           const inventories = await tx.$queryRaw<
             Array<{
               id: number;
@@ -68,13 +66,11 @@ export async function POST(req: NextRequest) {
             throw new Error(`INSUFFICIENT_STOCK_${productId}_${warehouseId}`);
           }
 
-          // Increment reserved stock
           await tx.inventory.update({
             where: { id: inventory.id },
             data: { reservedStock: { increment: quantity } },
           });
 
-          // Create reservation with 10-minute expiry
           const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
           const reservation = await tx.reservation.create({
             data: {
