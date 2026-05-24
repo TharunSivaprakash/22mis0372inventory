@@ -1,4 +1,4 @@
-﻿import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { withIdempotency } from "@/lib/idempotency";
 import { z } from "zod";
@@ -8,6 +8,7 @@ const ReserveSchema = z.object({
   warehouseId: z.number().int().positive(),
   quantity: z.number().int().positive().max(100),
 });
+
 
 export async function POST(req: NextRequest) {
   const idempotencyKey = req.headers.get("Idempotency-Key");
@@ -40,25 +41,40 @@ export async function POST(req: NextRequest) {
         for (const item of payload) {
           const { productId, warehouseId, quantity } = item;
 
-          const inventory = await tx.inventory.findFirst({
-            where: { productId, warehouseId }
-          });
+          // Lock the inventory row to prevent race conditions
+          const inventories = await tx.$queryRaw<
+            Array<{
+              id: number;
+              productId: number;
+              warehouseId: number;
+              totalStock: number;
+              reservedStock: number;
+            }>
+          >`
+            SELECT id, "productId", "warehouseId", "totalStock", "reservedStock"
+            FROM "Inventory"
+            WHERE "productId" = ${productId} AND "warehouseId" = ${warehouseId}
+            FOR UPDATE
+          `;
 
-          if (!inventory) {
-            throw new Error(`INVENTORY_NOT_FOUND_\${productId}\_\${warehouseId}\`);
+          if (!inventories || inventories.length === 0) {
+            throw new Error(`INVENTORY_NOT_FOUND_${productId}_${warehouseId}`);
           }
 
+          const inventory = inventories[0];
           const availableStock = inventory.totalStock - inventory.reservedStock;
 
           if (availableStock < quantity) {
-            throw new Error(`INSUFFICIENT_STOCK_\${productId}\_\${warehouseId}\`);
+            throw new Error(`INSUFFICIENT_STOCK_${productId}_${warehouseId}`);
           }
 
+          // Increment reserved stock
           await tx.inventory.update({
             where: { id: inventory.id },
             data: { reservedStock: { increment: quantity } },
           });
 
+          // Create reservation with 10-minute expiry
           const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
           const reservation = await tx.reservation.create({
             data: {
@@ -78,6 +94,9 @@ export async function POST(req: NextRequest) {
         }
 
         return reservations;
+      }, {
+        maxWait: 20000,
+        timeout: 40000,
       });
 
       if (isBulk) {
