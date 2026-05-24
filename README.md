@@ -96,3 +96,6 @@ npm run dev
 ```
 
 Now, open http://localhost:3000 in your browser!
+
+### Live demo
+https://22mis0372inventory-qluy.vercel.app/
