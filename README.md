@@ -1,10 +1,10 @@
-# Safe Inventory Reservation System
+# Inventory Reservation System
 
-This is a web project that helps online stores sell items safely without double-selling or overselling them. It holds items for a customer while they are paying, ensuring nobody else can buy them at the same split second.
+This  online stores sell items safely without double-selling or overselling them. It holds items for a customer while they are paying, ensuring nobody else can buy them at the same split second.
 
 ---
 
-## A Real-World Example (How It Works)
+## A Real-World Example
 
 Imagine you are booking Movie Tickets online:
 
@@ -96,3 +96,6 @@ npm run dev
 ```
 
 Now, open http://localhost:3000 in your browser!
+
+### Live demo
+https://22mis0372inventory-qluy.vercel.app/
