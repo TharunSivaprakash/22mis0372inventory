@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import GearLoader from "@/components/loaders/GearLoader";
 import BackgroundOrbs from "@/components/layout/BackgroundOrbs";
 
-export default function ReserveProcessingPage() {
+function ReserveProcessingInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const hasTriggeredRef = useRef(false);
@@ -89,3 +89,19 @@ export default function ReserveProcessingPage() {
   );
 }
 
+export default function ReserveProcessingPage() {
+  return (
+    <Suspense fallback={
+      <div style={{ position: "relative", minHeight: "100vh", background: "#0b0f19", overflow: "hidden" }}>
+        <BackgroundOrbs opacity1={0.45} opacity2={0.35} opacity3={0.35} />
+        <GearLoader 
+          isOpen={true} 
+          message="Securing inventory allocations" 
+          submessage=""
+        />
+      </div>
+    }>
+      <ReserveProcessingInner />
+    </Suspense>
+  );
+}
